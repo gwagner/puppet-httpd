@@ -9,18 +9,18 @@ class httpd
     }
 
     package {
-        ["httpd-tools-${httpd::config::httpd_version}", "httpd-devel-${httpd::config::httpd_version}"]:
+        ["httpd-tools", "httpd-devel"]:
             ensure => installed,
             provider => 'yum',
             require => Yumrepo['centos-base', 'centos-updates', 'centos-extras'];
         'httpd':
-            name => "httpd-${httpd::config::httpd_version}",
+            name => "httpd",
             ensure => installed,
             provider => 'yum',
             alias => 'httpd',
             require => [
-                Package["httpd-tools-${httpd::config::httpd_version}"],
-                Package["httpd-devel-${httpd::config::httpd_version}"],
+                Package["httpd-tools"],
+                Package["httpd-devel"],
                 Yumrepo['centos-base', 'centos-updates', 'centos-extras']
             ];
     }
@@ -87,8 +87,8 @@ class httpd
             hasrestart => true,
             hasstatus => true,
             subscribe => [
-                Package["httpd-tools-${httpd::config::httpd_version}"],
-                Package["httpd-devel-${httpd::config::httpd_version}"],
+                Package["httpd-tools"],
+                Package["httpd-devel"],
                 Package['httpd'],
                 File['httpd-readme'],
                 File['httpd-svn'],
