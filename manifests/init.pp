@@ -78,6 +78,11 @@ class httpd
             path => "/etc/httpd/conf/httpd.conf",
             content => template('httpd/conf/httpd.erb'),
             require => Package['httpd'];
+        'httpd-logs':
+            ensure => "directory",
+            owner => "apache",
+            group => "apache",
+            path  => "/var/log/httpd";
     }
 
     service {
@@ -95,6 +100,7 @@ class httpd
                 File['httpd-welcome'],
                 File['httpd-proxy_ajp-conf'],
                 File['httpd-conf'],
+                File['httpd-logs']
             ];
     }
 }
