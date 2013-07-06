@@ -109,6 +109,7 @@ define httpd::vhost (
     $directory,
     $ensure = 'present',
     $compress_output = true,
+    $other_directives = '',
     $server_alias = []
 ){
     file{

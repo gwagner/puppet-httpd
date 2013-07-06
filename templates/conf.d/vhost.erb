@@ -8,7 +8,9 @@
         ServerAlias <%= srvAlias %>
     <% end -%>
 
-    # Alias information that should be available across all branches
+    <% if other_directives %>
+        <%= other_directives %>
+    <% end %>
 
     <% if compress_output %>
     # Everything Mod Deflate
